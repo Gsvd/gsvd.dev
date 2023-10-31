@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Iosevka Aile Iaso";
+    font-weight: 100 900;
+    font-style: normal;
+    src: local("Iosevka Aile Iaso")
+       , url("/fonts/iosevka-aile-regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Iosevka Aile Iaso";
+    font-weight: 100 900;
+    font-style: italic;
+    src: local("Iosevka Aile Iaso")
+       , url("/fonts/iosevka-aile-italic.woff2") format("woff2");
+}
+    
+@font-face {
+    font-family: "Iosevka Curly Iaso";
+    font-weight: 100 900;
+    src: local("Iosevka Curly Iaso")
+       , url("/fonts/iosevka-curly-regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Iosevka Etoile Iaso";
+    font-weight: 100 900;
+    font-style: normal;
+    src: local("Iosevka Etoile Iaso")
+       , url("/fonts/iosevka-etoile-regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Iosevka Etoile Iaso";
+    font-weight: 100 900;
+    font-style: italic;
+    src: local("Iosevka Etoile Iaso")
+       , url("/fonts/iosevka-etoile-italic.woff2") format("woff2");
+}
+
+@layer base {
+    a {
+        @apply text-[#6D214F] hover:text-[#f9f5d7] dark:text-[#cc83e6] dark:hover:text-[#fbf1c7] hover:bg-[#6D214F] underline underline-offset-2
+    }
+}

@@ -1,0 +1,30 @@
+{{template "internal/templates/partials/header" .}}
+
+<div class="flex flex-col gap-y-4">
+    <div>
+        <h1 class="text-2xl">Gsvd</h1>
+        <div class="flex flex-row gap-x-2">
+            <img class="w-4 inline m-1" src="/images/ca.svg" alt="Canada" title="Canada">
+        </div>
+    </div>
+    <h2 class="text-lg">People-Focused Software Developer - Montréal, QC, CA</h2>
+    <div class="text-base">Ardent technophile. More of a back end person. I try to write articles sometimes on my <a href="/blog">blog</a>.</div>
+    <div class="text-2xl">Recent Articles</div>
+    <ul class="list-disc ml-4">
+        {{range .Articles}}
+        <li>{{.Date}} - <a href="/blog/{{.Slug}}">{{.Title}}</a></li>
+        {{end}}
+    </ul>
+    <div class="text-2xl">Quick Links</div>
+    <ul class="list-disc ml-4">
+        <li><a href="https://github.com/Gsvd" target="_blank" rel="noopener noreferrer">Github</a></li>
+        <li><a href="https://mas.to/@gsvd" target="_blank" rel="noopener noreferrer">Mastodon</a></li>
+    </ul>
+    <div class="text-2xl">Projects</div>
+    <ul class="list-disc ml-4">
+        <li><a href="https://github.com/Gsvd/gsvd.dev" target="_blank" rel="noopener noreferrer">This website</a></li>
+    </ul>
+    {{template "internal/templates/partials/skills" .}}
+</div>
+
+{{template "internal/templates/partials/footer" .}}
