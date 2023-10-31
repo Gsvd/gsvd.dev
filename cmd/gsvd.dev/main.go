@@ -22,6 +22,7 @@ func main() {
 	app.Get("/", handlers.HomeHandler)
 	app.Get("/blog", handlers.BlogHandler)
 	app.Get("/blog/:title", handlers.BlogPostHandler)
+	app.Get("/resume", handlers.ResumeHandler)
 
 	log.Fatal(app.Listen(":3000"))
 }

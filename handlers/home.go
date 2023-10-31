@@ -14,7 +14,7 @@ func HomeHandler(c *fiber.Ctx) error {
 		articlesMetadata = articlesMetadata[:5]
 	}
 	return c.Render("index", fiber.Map{
-		"Title":    "gsvd.dev",
+		"Title":    "Gsvd",
 		"Articles": articlesMetadata,
 	}, "layouts/main")
 }

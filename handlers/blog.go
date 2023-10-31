@@ -52,7 +52,7 @@ func BlogPostHandler(c *fiber.Ctx) error {
 	}
 
 	return c.Render("post", fiber.Map{
-		"Title":   metadata.Title,
+		"Title":   metadata.Title + " - Gsvd",
 		"Article": article,
 	}, "layouts/main")
 }
