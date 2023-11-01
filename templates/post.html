@@ -1,7 +1,7 @@
-{{template "partials/header" .}}
+{{template "templates/partials/header" .}}
 
 <h1 class="text-2xl underline underline-offset-2 mb-2">{{.Article.Metadata.Title}}</h1>
 <h2 class="text-lg mb-8 italic">{{.Article.Metadata.Date}}</h2>
 <article class="prose dark:prose-dark max-w-none">{{.Article.Content}}</article>
 
-{{template "partials/footer" .}}
+{{template "templates/partials/footer" .}}

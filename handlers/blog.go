@@ -3,14 +3,15 @@ package handlers
 import (
 	"bytes"
 	"fmt"
+	"html/template"
+	"net/http"
+
+	embeded "github.com/Gsvd/gsvd.dev"
 	"github.com/Gsvd/gsvd.dev/internal"
 	"github.com/gernest/front"
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
 	"github.com/russross/blackfriday/v2"
-	"html/template"
-	"net/http"
-	"os"
 )
 
 func BlogHandler(c *fiber.Ctx) error {
@@ -18,16 +19,16 @@ func BlogHandler(c *fiber.Ctx) error {
 	if err != nil {
 		panic(err)
 	}
-	return c.Render("blog", fiber.Map{
+	return c.Render("templates/blog", fiber.Map{
 		"Title":    "Blog Articles - Gsvd",
 		"Articles": articlesMetadata,
-	}, "layouts/main")
+	}, "templates/layouts/main")
 }
 
 func BlogPostHandler(c *fiber.Ctx) error {
-	filename := fmt.Sprintf("./articles/%s.md", c.Params("title"))
+	filename := fmt.Sprintf("articles/%s.md", c.Params("title"))
 
-	fileContent, err := os.ReadFile(filename)
+	fileContent, err := embeded.ArticleFiles.ReadFile(filename)
 	if err != nil {
 		return c.SendStatus(http.StatusNotFound)
 	}
@@ -51,8 +52,8 @@ func BlogPostHandler(c *fiber.Ctx) error {
 		Content:  template.HTML(htmlContent),
 	}
 
-	return c.Render("post", fiber.Map{
+	return c.Render("templates/post", fiber.Map{
 		"Title":   metadata.Title + " - Gsvd",
 		"Article": article,
-	}, "layouts/main")
+	}, "templates/layouts/main")
 }

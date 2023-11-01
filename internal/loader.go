@@ -2,17 +2,18 @@ package internal
 
 import (
 	"bytes"
-	"github.com/gernest/front"
-	"github.com/mitchellh/mapstructure"
-	"os"
 	"path/filepath"
 	"sort"
 	"strings"
+
+	embeded "github.com/Gsvd/gsvd.dev"
+	"github.com/gernest/front"
+	"github.com/mitchellh/mapstructure"
 )
 
 func LoadArticlesMetadata() ([]ArticleMetadata, error) {
 	var articlesMetadata []ArticleMetadata
-	articles, err := os.ReadDir("./articles/")
+	articles, err := embeded.ArticleFiles.ReadDir("articles")
 	if err != nil {
 		panic(err)
 	}
@@ -23,7 +24,7 @@ func LoadArticlesMetadata() ([]ArticleMetadata, error) {
 			continue
 		}
 
-		fileContent, err := os.ReadFile("./articles/" + article.Name())
+		fileContent, err := embeded.ArticleFiles.ReadFile("articles/" + article.Name())
 		if err != nil {
 			return nil, err
 		}

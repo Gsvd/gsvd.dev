@@ -2,22 +2,41 @@ package main
 
 import (
 	"log"
+	"net/http"
 
+	embeded "github.com/Gsvd/gsvd.dev"
 	"github.com/Gsvd/gsvd.dev/handlers"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/template/html/v2"
 )
 
 func main() {
-	engine := html.New("./templates", ".html")
+	engine := html.NewFileSystem(http.FS(embeded.TemplateFiles), ".html")
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
 
-	app.Static("/css", "./static/css")
-	app.Static("/js", "./public/js")
-	app.Static("/images", "./public/images")
-	app.Static("/fonts", "./public/fonts")
+	app.Use("/css", filesystem.New(filesystem.Config{
+		Root:       http.FS(embeded.DistFiles),
+		PathPrefix: "dist/css",
+		Browse:     true,
+	}))
+	app.Use("/js", filesystem.New(filesystem.Config{
+		Root:       http.FS(embeded.PublicFiles),
+		PathPrefix: "public/js",
+		Browse:     true,
+	}))
+	app.Use("/images", filesystem.New(filesystem.Config{
+		Root:       http.FS(embeded.PublicFiles),
+		PathPrefix: "public/images",
+		Browse:     true,
+	}))
+	app.Use("/fonts", filesystem.New(filesystem.Config{
+		Root:       http.FS(embeded.PublicFiles),
+		PathPrefix: "public/fonts",
+		Browse:     true,
+	}))
 
 	app.Get("/", handlers.HomeHandler)
 	app.Get("/blog", handlers.BlogHandler)

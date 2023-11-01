@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "npx tailwindcss -i ./public/css/main.css -o ./static/css/tailwind.min.css --minify",
-    "watch": "npx tailwindcss -i ./public/css/main.css -o ./static/css/tailwind.min.css --watch --minify"
+    "build": "npx tailwindcss -i ./public/css/main.css -o ./dist/css/tailwind.min.css --minify",
+    "watch": "npx tailwindcss -i ./public/css/main.css -o ./dist/css/tailwind.min.css --watch --minify"
   },
   "author": "Gsvd",
   "license": "ISC",
