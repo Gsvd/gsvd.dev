@@ -30,7 +30,7 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.21  # ou la version de votre choix
+        go-version: 1.21
 
     - name: Set up SSH
       run: |
@@ -40,7 +40,7 @@ jobs:
         echo "StrictHostKeyChecking=no" >> ~/.ssh/config
 
     - name: Compile for Raspberry Pi
-      run: GOOS=linux GOARCH=arm GOARM=7 go build -o monsite
+      run: GOOS=linux GOARCH=arm GOARM=7 go build -o ./cmd/gsvd.dev/tmp/main ./cmd/gsvd.dev
 
     - name: Deploy to Raspberry Pi
       run: |
