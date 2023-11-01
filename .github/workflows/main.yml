@@ -44,5 +44,5 @@ jobs:
 
     - name: Deploy to Raspberry Pi
       run: |
-        scp ./cmd/gsvd.dev/tmp/main pi@${{ secrets.PI_HOSTNAME }}:/home/deployer
-        ssh pi@${{ secrets.PI_HOSTNAME }} 'sudo systemctl restart nginx'
+        scp ./cmd/gsvd.dev/tmp/main deployer@${{ secrets.PI_HOSTNAME }}:/home/deployer
+        ssh deployer@${{ secrets.PI_HOSTNAME }} 'sudo systemctl restart nginx'
