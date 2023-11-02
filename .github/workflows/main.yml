@@ -45,4 +45,4 @@ jobs:
     - name: Deploy to Raspberry Pi
       run: |
         scp ./cmd/gsvd.dev/tmp/main deployer@${{ secrets.PI_HOSTNAME }}:/home/deployer/gsvd.dev
-        ssh deployer@${{ secrets.PI_HOSTNAME }} 'sudo systemctl restart nginx'
+        ssh deployer@${{ secrets.PI_HOSTNAME }} 'sudo systemctl restart gsvd.dev.service'

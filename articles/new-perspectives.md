@@ -33,3 +33,5 @@ For the curious ones, here are the technological choices I made:
 * [Tailwind](https://tailwindcss.com/)
 
 Probably an "overkill" choice, but after all, you're in my house now 😉
+
+EDIT (2023-11-02): Upon reflection and further exploration, which I detail in my last article, I've reconsidered some of the technological choices listed above.
