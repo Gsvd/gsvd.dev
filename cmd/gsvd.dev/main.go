@@ -20,23 +20,31 @@ func main() {
 	app.Use("/css", filesystem.New(filesystem.Config{
 		Root:       http.FS(embeded.DistFiles),
 		PathPrefix: "dist/css",
-		Browse:     true,
+		Browse:     false,
 	}))
 	app.Use("/js", filesystem.New(filesystem.Config{
 		Root:       http.FS(embeded.PublicFiles),
 		PathPrefix: "public/js",
-		Browse:     true,
+		Browse:     false,
 	}))
 	app.Use("/images", filesystem.New(filesystem.Config{
 		Root:       http.FS(embeded.PublicFiles),
 		PathPrefix: "public/images",
-		Browse:     true,
+		Browse:     false,
 	}))
 	app.Use("/fonts", filesystem.New(filesystem.Config{
 		Root:       http.FS(embeded.PublicFiles),
 		PathPrefix: "public/fonts",
-		Browse:     true,
+		Browse:     false,
 	}))
+	app.Get("/sitemap.xml", func(c *fiber.Ctx) error {
+		file, err := embeded.SiteMapFile.ReadFile("sitemap.xml")
+		if err != nil {
+			return c.SendStatus(fiber.StatusInternalServerError)
+		}
+		c.Set("Content-Type", "application/xml")
+		return c.Send(file)
+	})
 
 	app.Get("/", handlers.HomeHandler)
 	app.Get("/blog", handlers.BlogHandler)

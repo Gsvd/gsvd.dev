@@ -13,3 +13,6 @@ var TemplateFiles embed.FS
 
 //go:embed articles/*
 var ArticleFiles embed.FS
+
+//go:embed sitemap.xml
+var SiteMapFile embed.FS
