@@ -42,11 +42,7 @@
 }
 
 @layer base {
-    .navbar a {
-        @apply text-xl hover:text-white hover:bg-black
-    }
-
     a {
-        @apply text-[#6D214F] hover:text-[#f9f5d7] dark:text-[#cc83e6] dark:hover:text-white hover:bg-[#6D214F] underline underline-offset-2
+        @apply text-[#6D214F] hover:text-[#f9f5d7] dark:text-[#cc83e6] dark:hover:text-[#fbf1c7] hover:bg-[#6D214F] underline underline-offset-2
     }
 }

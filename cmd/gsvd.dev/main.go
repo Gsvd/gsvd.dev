@@ -22,11 +22,6 @@ func main() {
 		PathPrefix: "dist/css",
 		Browse:     false,
 	}))
-	app.Use("/js", filesystem.New(filesystem.Config{
-		Root:       http.FS(embeded.PublicFiles),
-		PathPrefix: "public/js",
-		Browse:     false,
-	}))
 	app.Use("/images", filesystem.New(filesystem.Config{
 		Root:       http.FS(embeded.PublicFiles),
 		PathPrefix: "public/images",
