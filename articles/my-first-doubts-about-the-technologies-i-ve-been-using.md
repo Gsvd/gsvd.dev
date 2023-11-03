@@ -1,5 +1,6 @@
 ---
 title: "My first doubts about the technologies I've been using"
+slug: "my-first-doubts-about-the-technologies-i-ve-been-using"
 date: "October 25, 2023"
 order: 1
 ---

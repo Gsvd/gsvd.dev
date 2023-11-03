@@ -20,8 +20,9 @@ func BlogHandler(c *fiber.Ctx) error {
 		panic(err)
 	}
 	return c.Render("templates/blog", fiber.Map{
-		"Title":    "Blog Articles - Gsvd",
-		"Articles": articlesMetadata,
+		"Title":     "Blog Articles - Gsvd",
+		"Articles":  articlesMetadata,
+		"Canonical": "blog",
 	}, "templates/layouts/main")
 }
 
@@ -53,7 +54,8 @@ func BlogPostHandler(c *fiber.Ctx) error {
 	}
 
 	return c.Render("templates/post", fiber.Map{
-		"Title":   metadata.Title + " - Gsvd",
-		"Article": article,
+		"Title":     metadata.Title + " - Gsvd",
+		"Article":   article,
+		"Canonical": "blog/" + metadata.Slug,
 	}, "templates/layouts/main")
 }

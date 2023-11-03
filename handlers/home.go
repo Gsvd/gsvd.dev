@@ -14,7 +14,8 @@ func HomeHandler(c *fiber.Ctx) error {
 		articlesMetadata = articlesMetadata[:5]
 	}
 	return c.Render("templates/index", fiber.Map{
-		"Title":    "Gsvd",
-		"Articles": articlesMetadata,
+		"Title":     "Gsvd - Full Stack Developer and App Designer | Freelance Web & Software Engineer in Nice, France",
+		"Articles":  articlesMetadata,
+		"Canonical": "",
 	}, "templates/layouts/main")
 }

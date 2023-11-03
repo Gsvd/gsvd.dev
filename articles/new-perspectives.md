@@ -1,5 +1,6 @@
 ---
 title: "New perspectives"
+slug: "new-perspectives"
 date: "August 18, 2023"
 order: 0
 ---
