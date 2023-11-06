@@ -15,11 +15,22 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            '--tw-prose-quote-borders': '#3a3737',
             color: '#3a3737',
+            blockquote: {
+              color: '#3a3737',
+            },
             h2: {
               color: '#3a3737',
             },
+            h3: {
+              color: '#3a3737',
+            },
             pre: {
+              backgroundColor: 'black',
+              color: 'silver',
+            },
+            code: {
               backgroundColor: 'black',
               color: 'silver',
             },
@@ -33,11 +44,22 @@ module.exports = {
         },
         dark: {
           css: {
+            '--tw-prose-quote-borders': '#fbf1c7',
             color: '#fbf1c7',
+            blockquote: {
+              color: '#fbf1c7',
+            },
             h2: {
               color: '#fbf1c7',
             },
+            h3: {
+              color: '#fbf1c7',
+            },
             pre: {
+              backgroundColor: '#32302f',
+              color: '#fbf1c7',
+            },
+            code: {
               backgroundColor: '#32302f',
               color: '#fbf1c7',
             },
