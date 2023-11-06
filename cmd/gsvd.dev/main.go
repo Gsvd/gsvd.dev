@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"log"
 	"net/http"
 
@@ -16,6 +17,8 @@ func main() {
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
+
+	app.Use(logger.New())
 
 	app.Use("/css", filesystem.New(filesystem.Config{
 		Root:       http.FS(embeded.DistFiles),
