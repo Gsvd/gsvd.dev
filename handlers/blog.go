@@ -57,5 +57,5 @@ func BlogPostHandler(c *fiber.Ctx) error {
 		"Title":     metadata.Title + " - Gsvd",
 		"Article":   article,
 		"Canonical": "blog/" + metadata.Slug,
-	}, "templates/layouts/main")
+	}, "templates/layouts/post")
 }
