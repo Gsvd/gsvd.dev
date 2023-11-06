@@ -89,7 +89,7 @@ systemctl status qbittorrent
 
 ## Firewall (using UFW)
 
-Allow the necessary ports through the firewall, when the Nginx reverse proxy is configured, you can remove port 8080 from your authorisations.:
+Allow the necessary ports through the firewall, when the Nginx reverse proxy is configured, you can remove port 8080 from your authorisations:
 
 ```
 ufw allow 8080
