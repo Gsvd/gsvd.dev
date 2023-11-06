@@ -19,6 +19,12 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://www.gsvd.dev/blog/create-a-seedbox-on-raspberry-pi-using-the-latest-version-of-qbittorrent</loc>
+        <lastmod>2023-11-06</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://www.gsvd.dev/blog/my-first-doubts-about-the-technologies-i-ve-been-using</loc>
         <lastmod>2023-10-25</lastmod>
         <changefreq>yearly</changefreq>
