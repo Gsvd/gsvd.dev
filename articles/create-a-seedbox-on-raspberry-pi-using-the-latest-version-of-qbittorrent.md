@@ -93,8 +93,8 @@ systemctl status qbittorrent
 Allow the necessary ports through the firewall, when the Nginx reverse proxy is configured, you can remove port 8080 from your authorisations:
 
 ```
-ufw allow 8080
-ufw allow 65530
+ufw allow 8080/tcp comment 'qBittorrent WebUI'
+ufw allow 65530/tcp comment 'libTorrent'
 ```
 
 ## Router port redirection
@@ -103,7 +103,7 @@ Here's a brief reminder: ensure that your server is configured with a static IP 
 
 ## Access to web interface
 
-The web interface should now be accessible. Navigate to `http://<your-ip>:8080` in your web browser. The default credentials are `admin/adminadmin.
+The web interface should now be accessible. Navigate to `http://<your-ip>:8080` in your web browser. The default credentials are `admin/adminadmin`.
 
 Immediately change the default login details:
 
@@ -126,7 +126,7 @@ server {
   listen 80 http2;
   listen [::]:80 http2;
 
-  server_name yourdomain.name;
+  server_name example.com;
 
   location / {
     proxy_pass              http://127.0.0.1:8080;
