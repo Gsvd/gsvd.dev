@@ -48,6 +48,7 @@ func main() {
 	app.Get("/blog", handlers.BlogHandler)
 	app.Get("/blog/:title", handlers.BlogPostHandler)
 	app.Get("/resume", handlers.ResumeHandler)
+	app.Get("/contact", handlers.ContactHandler)
 
 	log.Fatal(app.Listen(":3000"))
 }

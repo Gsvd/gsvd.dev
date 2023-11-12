@@ -4,8 +4,8 @@ tmp_dir = "./cmd/gsvd.dev/tmp"
 
 [build]
   args_bin = []
-  bin = "./cmd/gsvd.dev/tmp/main"
-  cmd = "go build -o ./cmd/gsvd.dev/tmp/main ./cmd/gsvd.dev"
+  bin = "./cmd/gsvd.dev/tmp/main.exe"
+  cmd = "go build -o ./cmd/gsvd.dev/tmp/main.exe ./cmd/gsvd.dev"
   delay = 1000
   exclude_dir = ["assets", "tmp", "vendor", "testdata", "node_modules"]
   exclude_file = []
