@@ -18,7 +18,9 @@ func main() {
 		Views: engine,
 	})
 
-	app.Use(logger.New())
+	app.Use(logger.New(logger.Config{
+		Format: "[${ip}]:${port} ${status} - ${method} ${path}\n",
+	}))
 
 	app.Use("/css", filesystem.New(filesystem.Config{
 		Root:       http.FS(embeded.DistFiles),
