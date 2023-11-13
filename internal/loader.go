@@ -42,7 +42,7 @@ func LoadArticlesMetadata() ([]ArticleMetadata, error) {
 	}
 
 	sort.Slice(articlesMetadata, func(i, j int) bool {
-		return articlesMetadata[i].Order > articlesMetadata[j].Order
+		return articlesMetadata[i].Id > articlesMetadata[j].Id
 	})
 
 	return articlesMetadata, nil

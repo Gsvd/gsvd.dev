@@ -16,6 +16,8 @@ module.exports = {
         DEFAULT: {
           css: {
             '--tw-prose-quote-borders': '#3a3737',
+            'blockquote p:first-of-type::before': false,
+            'blockquote p:first-of-type::after': false,
             color: '#3a3737',
             blockquote: {
               color: '#3a3737',

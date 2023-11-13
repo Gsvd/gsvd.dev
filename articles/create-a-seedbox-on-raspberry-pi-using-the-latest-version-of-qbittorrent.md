@@ -3,7 +3,7 @@ title: "Create a seedbox on Raspberry Pi using the latest version of qbittorrent
 description: "qBittorrent has consistently stood out for its comprehensive features. However, as of the time of writing, the only version of qbittorrent-nox available for Raspbian is somewhat outdated (4.1.5)."
 slug: "create-a-seedbox-on-raspberry-pi-using-the-latest-version-of-qbittorrent"
 date: "November 6, 2023"
-order: 2
+id: 2
 ---
 
 ## Introduction

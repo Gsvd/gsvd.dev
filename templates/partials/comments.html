@@ -1,0 +1,32 @@
+<div id="comments" class="flex flex-col gap-y-4">
+    <h2 class="text-lg mb-2 italic underline underline-offset-2">Feel free to leave a comment</h2>
+    <div class="flex flex-col prose dark:prose-dark max-w-none">
+        <div>
+            <blockquote>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe delectus ducimus optio corporis itaque repellendus mollitia, sapiente explicabo totam ullam, veritatis dolor obcaecati animi possimus. Similique ullam aspernatur enim error!</p>
+                <div class="flex items-center text-sm justify-end divide-x-2 divide-[#3a3737] dark:divide-[#fbf1c7]/[0.65]">
+                    <cite class="pe-3 font-medium">Mario</cite>
+                    <cite class="ps-3">2023-11-12 13:04</cite>
+                </div>
+            </blockquote>
+        </div>
+        <div>
+            <blockquote>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius officiis veritatis asperiores et alias, pariatur earum perferendis, delectus optio consequatur distinctio nostrum neque voluptatum quos ipsa natus facilis architecto adipisci?</p>
+                <div class="flex items-center text-sm justify-end divide-x-2 divide-[#3a3737] dark:divide-[#fbf1c7]/[0.65]">
+                    <cite class="pe-3 font-medium">Mario</cite>
+                    <cite class="ps-3">2023-11-12 13:01</cite>
+                </div>
+            </blockquote>
+        </div>
+        <div class="flex flex-col gap-y-2">
+            <form action="/blog/{{.Article.Metadata.Slug}}" method="post">
+                <textarea placeholder="Such a great article!" class="p-4 resize-y w-full bg-[#f2e5bc] dark:bg-[#32302f] dark:text-[#fbf1c7]/[0.85] outline-none" name="comment" id="comment" rows="5"></textarea>
+                <div class="flex md:flex-row flex-col justify-end gap-2">
+                    <input type="text" name="pseudo" class="bg-[#f2e5bc] dark:bg-[#32302f] dark:text-[#fbf1c7]/[0.85] px-2 outline-none md:w-48 w-full" placeholder="Gordon Clark">
+                    <input type="submit" value="Send" class="bg-[#f2e5bc] dark:bg-[#32302f] dark:text-[#fbf1c7]/[0.85] hover:cursor-pointer md:w-48 w-full">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
