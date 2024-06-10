@@ -137,6 +137,12 @@ server {
 }
 ```
 
+Don't forget to enable this Nginx configuration:
+
+```
+ln -s /etc/nginx/sites-available/qbittorrent.conf /etc/nginx/sites-enabled
+```
+
 ## Going further
 
 Here are some additional considerations for future exploration:
@@ -146,6 +152,7 @@ Here are some additional considerations for future exploration:
 3. Setting up a VPN, like [PiVPN](https://www.pivpn.io/), to access your seedbox from anywhere without using Nginx.
 4. Securing your server with [fail2ban](https://github.com/fail2ban/fail2ban).
 5. Implementing an [alternative WebUI](https://github.com/qbittorrent/qBittorrent/wiki/List-of-known-alternate-WebUIs).
+6. Torrenting more safely by setting up proxy usage.
 
 ## Conclusion
 
