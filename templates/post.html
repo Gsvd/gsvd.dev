@@ -4,34 +4,4 @@
 <h2 class="text-lg mb-8 italic">{{.Article.Metadata.Date}}</h2>
 <article class="prose dark:prose-dark max-w-none">{{.Article.Content}}</article>
 
-<h2 class="text-2xl mt-8 mb-4">Comments</h2>
-<div class="flex flex-col">
-    <div class="flex md:flex-col flex-col-reverse gap-y-2 prose dark:prose-dark max-w-none">
-        {{if .Comments}}
-            {{range .Comments}}
-            <div>
-                <blockquote class="m-0">
-                    <p>{{.Content}}</p>
-                    <div class="flex items-center justify-between text-sm">
-                        <cite class="font-medium">{{.Author}}</cite>
-                        <cite>{{.CreatedFormatted}}</cite>
-                    </div>
-                </blockquote>
-            </div>
-            {{end}}
-        {{else}}
-        <p>There is no comment yet.</p>
-        {{end}}
-        <div class="flex flex-col md:mt-4">
-            <form action="/blog/{{.Article.Metadata.Slug}}/{{.Article.Metadata.Id}}" method="post">
-                <textarea placeholder="Such a great article!" class="p-4 resize-y w-full bg-[#f2e5bc] dark:bg-[#32302f] dark:text-[#fbf1c7]/[0.85] outline-none" name="content" rows="5"></textarea>
-                <div class="flex md:flex-row flex-col justify-end gap-2">
-                    <input type="text" name="author" class="bg-[#f2e5bc] dark:bg-[#32302f] dark:text-[#fbf1c7]/[0.85] px-2 outline-none md:w-48 w-full" placeholder="Gordon Clark">
-                    <input type="submit" value="Send" class="bg-[#f2e5bc] dark:bg-[#32302f] dark:text-[#fbf1c7]/[0.85] hover:cursor-pointer md:w-48 w-full">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 {{template "templates/partials/footer" .}}

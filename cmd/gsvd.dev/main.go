@@ -1,23 +1,18 @@
 package main
 
 import (
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"log"
+	"net/http"
+
 	embeded "github.com/Gsvd/gsvd.dev"
 	"github.com/Gsvd/gsvd.dev/handlers"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/template/html/v2"
-	"github.com/joho/godotenv"
-	"log"
-	"net/http"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-
 	engine := html.NewFileSystem(http.FS(embeded.TemplateFiles), ".html")
 	app := fiber.New(fiber.Config{
 		Views: engine,
@@ -54,7 +49,6 @@ func main() {
 	app.Get("/", handlers.HomeHandler)
 	app.Get("/blog", handlers.BlogHandler)
 	app.Get("/blog/:title", handlers.BlogPostHandler)
-	app.Post("/blog/:title/:id", handlers.BlogPostCommentHandler)
 	app.Get("/resume", handlers.ResumeHandler)
 	app.Get("/contact", handlers.ContactHandler)
 
