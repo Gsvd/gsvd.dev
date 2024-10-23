@@ -40,7 +40,7 @@ jobs:
         echo "StrictHostKeyChecking=no" >> ~/.ssh/config
 
     - name: Compile for Raspberry Pi
-      run: GOOS=linux GOARCH=arm GOARM=7 go build -o ./cmd/gsvd.dev/tmp/main ./cmd/gsvd.dev
+      run: GOOS=linux GOARCH=amd64 go build -o ./cmd/gsvd.dev/tmp/main ./cmd/gsvd.dev
 
     - name: Deploy to Raspberry Pi
       run: |
