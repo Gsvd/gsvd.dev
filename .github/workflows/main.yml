@@ -44,6 +44,6 @@ jobs:
 
     - name: Deploy to Raspberry Pi
       run: |
-        ssh deployer@${{ secrets.PI_HOSTNAME }} 'sudo systemctl stop gsvd.dev.service'
-        scp ./cmd/gsvd.dev/tmp/main deployer@${{ secrets.PI_HOSTNAME }}:/home/deployer/gsvd.dev
-        ssh deployer@${{ secrets.PI_HOSTNAME }} 'sudo systemctl start gsvd.dev.service'
+        ssh deployer@gsvd.dev 'sudo systemctl stop gsvd.dev.service'
+        scp ./cmd/gsvd.dev/tmp/main deployer@gsvd.dev:/home/deployer/gsvd.dev
+        ssh deployer@gsvd.dev 'sudo systemctl start gsvd.dev.service'
