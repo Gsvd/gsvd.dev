@@ -24,4 +24,10 @@
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://www.gsvd.dev/blog/host-your-own-password-manager-with-vaultwarden-and-nginx</loc>
+        <lastmod>2025-01-30</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>
