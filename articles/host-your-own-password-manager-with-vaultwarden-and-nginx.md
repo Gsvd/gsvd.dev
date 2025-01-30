@@ -74,7 +74,7 @@ Add this configuration in your `/etc/nginx/sites-available` directory then enabl
 ```
 sudo nano /etc/nginx/sites-available/example.com
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled
-sudo systemctl restart nginx
+sudo systemctl reload nginx
 ```
 
 From here you can try to access to `http://example.com/` — it should work.
