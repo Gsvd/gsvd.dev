@@ -74,6 +74,7 @@ Add this configuration in your `/etc/nginx/sites-available` directory then enabl
 ```
 sudo nano /etc/nginx/sites-available/example.com
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled
+sudo nginx -t
 sudo systemctl reload nginx
 ```
 
