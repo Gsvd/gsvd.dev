@@ -36,7 +36,7 @@ We will be using the `/vw-data` directory, so make sure to create it first and e
 ```bash
 podman run --detach \
     --name vaultwarden \
-    --env DOMAIN="https://sub.domain.tld" \
+    --env DOMAIN="https://example.com" \
     --env ADMIN_TOKEN="SOME_RANDOM_STRING" \
     --volume /vw-data/:/data/ \
     --restart unless-stopped \
@@ -45,7 +45,7 @@ podman run --detach \
 ```
 
 - Don't worry, thanks to the `--restart unless-stopped` parameter, it will always be up, even after a reboot.
-- The `ADMIN_TOKEN` will allow you to access the admin backend at `https://sub.domain.tld/admin`.
+- The `ADMIN_TOKEN` will allow you to access the admin backend at `https://example.com/admin`.
 
 ## Nginx reverse proxy
 
@@ -56,7 +56,7 @@ server {
     listen 80;
     listen [::]:80;
     
-    server_name sub.domain.tld;
+    server_name example.com;
 
     location / {
         proxy_pass http://127.0.0.1:8080;
@@ -72,11 +72,11 @@ server {
 Add this configuration in your `/etc/nginx/sites-available` directory then enable it:
 
 ```
-sudo nano /etc/nginx/sites-available/sub.domain.tld
-sudo ln -s /etc/nginx/sites-available/sub.domain.tld /etc/nginx/sites-enabled
+sudo nano /etc/nginx/sites-available/example.com
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled
 sudo systemctl restart nginx
 ```
 
-From here you can try to access to `http://sub.domain.tld/` — it should work.
+From here you can try to access to `http://example.com/` — it should work.
 
-Don’t forget to check out `http://sub.domain.tld/admin` as well, using your `ADMIN_TOKEN` from the previous step.
+Don’t forget to check out `http://example.com/admin` as well, using your `ADMIN_TOKEN` from the previous step.
