@@ -40,7 +40,7 @@ podman run --detach \
     --env ADMIN_TOKEN="SOME_RANDOM_STRING" \
     --volume /vw-data/:/data/ \
     --restart unless-stopped \
-    --publish 8080:80 \
+    --publish 127.0.0.1:8080:80 \
     docker.io/vaultwarden/server:latest
 ```
 
