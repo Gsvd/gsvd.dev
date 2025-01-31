@@ -14,7 +14,7 @@ import (
 
 func LoadArticles() ([]models.Metadata, error) {
 	var metadatas []models.Metadata
-	articles, err := embeded.ArticleFiles.ReadDir("content")
+	articles, err := embeded.ContentFiles.ReadDir("internal/content")
 	if err != nil {
 		panic(err)
 	}
@@ -25,7 +25,7 @@ func LoadArticles() ([]models.Metadata, error) {
 			continue
 		}
 
-		fileContent, err := embeded.ArticleFiles.ReadFile("articles/" + article.Name())
+		fileContent, err := embeded.ContentFiles.ReadFile("internal/content/" + article.Name())
 		if err != nil {
 			return nil, err
 		}

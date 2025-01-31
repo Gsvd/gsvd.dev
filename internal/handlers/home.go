@@ -13,9 +13,9 @@ func HomeHandler(c *fiber.Ctx) error {
 	if len(articlesMetadata) > 5 {
 		articlesMetadata = articlesMetadata[:5]
 	}
-	return c.Render("templates/index", fiber.Map{
+	return c.Render("internal/templates/index", fiber.Map{
 		"Title":     "Gsvd - People-Focused Software Developer",
 		"Articles":  articlesMetadata,
 		"Canonical": "",
-	}, "templates/layouts/main")
+	}, "internal/templates/layouts/main")
 }

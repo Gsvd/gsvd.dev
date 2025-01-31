@@ -5,8 +5,8 @@ import (
 )
 
 func ResumeHandler(c *fiber.Ctx) error {
-	return c.Render("templates/resume", fiber.Map{
+	return c.Render("internal/templates/resume", fiber.Map{
 		"Title":     "Resume - Gsvd",
 		"Canonical": "resume",
-	}, "templates/layouts/main")
+	}, "internal/templates/layouts/main")
 }

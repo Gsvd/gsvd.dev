@@ -5,8 +5,8 @@ import (
 )
 
 func ContactHandler(c *fiber.Ctx) error {
-	return c.Render("templates/contact", fiber.Map{
+	return c.Render("internal/templates/contact", fiber.Map{
 		"Title":     "Contact - Gsvd",
 		"Canonical": "contact",
-	}, "templates/layouts/main")
+	}, "internal/templates/layouts/main")
 }

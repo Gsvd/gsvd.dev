@@ -12,7 +12,7 @@ var DistFiles embed.FS
 var TemplateFiles embed.FS
 
 //go:embed internal/content/*
-var ArticleFiles embed.FS
+var ContentFiles embed.FS
 
 //go:embed sitemap.xml
 var SiteMapFile embed.FS

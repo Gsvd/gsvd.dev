@@ -1,11 +1,11 @@
 root = "."
 testdata_dir = "testdata"
-tmp_dir = "./cmd/gsvd.dev/tmp"
+tmp_dir = "./dist/tmp"
 
 [build]
   args_bin = []
-  bin = "./cmd/gsvd.dev/tmp/main"
-  cmd = "go build -o ./cmd/gsvd.dev/tmp/main ./cmd/gsvd.dev"
+  bin = "./dist/tmp/main"
+  cmd = "go build -o ./dist/tmp/main ./cmd/gsvd.dev"
   delay = 1000
   exclude_dir = ["assets", "tmp", "vendor", "testdata", "node_modules"]
   exclude_file = []

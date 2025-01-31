@@ -20,17 +20,17 @@ func BlogHandler(c *fiber.Ctx) error {
 	if err != nil {
 		panic(err)
 	}
-	return c.Render("templates/blog", fiber.Map{
+	return c.Render("internal/templates/blog", fiber.Map{
 		"Title":     "Blog Articles - Gsvd",
 		"Articles":  articlesMetadata,
 		"Canonical": "blog",
-	}, "templates/layouts/main")
+	}, "internal/templates/layouts/main")
 }
 
 func BlogPostHandler(c *fiber.Ctx) error {
-	filename := fmt.Sprintf("articles/%s.md", c.Params("title"))
+	filename := fmt.Sprintf("internal/content/%s.md", c.Params("title"))
 
-	fileContent, err := embeded.ArticleFiles.ReadFile(filename)
+	fileContent, err := embeded.ContentFiles.ReadFile(filename)
 	if err != nil {
 		return c.SendStatus(http.StatusNotFound)
 	}
@@ -54,9 +54,9 @@ func BlogPostHandler(c *fiber.Ctx) error {
 		Content:  template.HTML(htmlContent),
 	}
 
-	return c.Render("templates/post", fiber.Map{
+	return c.Render("internal/templates/post", fiber.Map{
 		"Title":     metadata.Title + " - Gsvd",
 		"Article":   article,
 		"Canonical": "blog/" + metadata.Slug,
-	}, "templates/layouts/post")
+	}, "internal/templates/layouts/post")
 }
