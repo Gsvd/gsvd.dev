@@ -8,10 +8,10 @@ var PublicFiles embed.FS
 //go:embed dist/*
 var DistFiles embed.FS
 
-//go:embed templates/*
+//go:embed internal/templates/*
 var TemplateFiles embed.FS
 
-//go:embed articles/*
+//go:embed internal/content/*
 var ArticleFiles embed.FS
 
 //go:embed sitemap.xml

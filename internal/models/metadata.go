@@ -1,9 +1,9 @@
-package internal
+package models
 
-type ArticleMetadata struct {
+type Metadata struct {
+	Id          int
 	Slug        string
 	Title       string
 	Description string
-	Id       int
 	Date        string
 }

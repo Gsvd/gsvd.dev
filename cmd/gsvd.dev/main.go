@@ -1,12 +1,13 @@
 package main
 
 import (
-	"github.com/gofiber/fiber/v2/middleware/logger"
 	"log"
 	"net/http"
 
+	"github.com/gofiber/fiber/v2/middleware/logger"
+
 	embeded "github.com/Gsvd/gsvd.dev"
-	"github.com/Gsvd/gsvd.dev/handlers"
+	"github.com/Gsvd/gsvd.dev/internal/handlers"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/template/html/v2"

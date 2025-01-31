@@ -7,7 +7,8 @@ import (
 	"net/http"
 
 	embeded "github.com/Gsvd/gsvd.dev"
-	"github.com/Gsvd/gsvd.dev/internal"
+	"github.com/Gsvd/gsvd.dev/internal/models"
+	"github.com/Gsvd/gsvd.dev/internal/services"
 	"github.com/gernest/front"
 	"github.com/gofiber/fiber/v2"
 	"github.com/mitchellh/mapstructure"
@@ -15,7 +16,7 @@ import (
 )
 
 func BlogHandler(c *fiber.Ctx) error {
-	articlesMetadata, err := internal.LoadArticlesMetadata()
+	articlesMetadata, err := services.LoadArticles()
 	if err != nil {
 		panic(err)
 	}
@@ -41,14 +42,14 @@ func BlogPostHandler(c *fiber.Ctx) error {
 		panic(err)
 	}
 
-	metadata := &internal.ArticleMetadata{}
+	metadata := &models.Metadata{}
 	if err := mapstructure.Decode(f, metadata); err != nil {
 		panic(err)
 	}
 
 	htmlContent := blackfriday.Run([]byte(body))
 
-	article := internal.Article{
+	article := models.Article{
 		Metadata: *metadata,
 		Content:  template.HTML(htmlContent),
 	}

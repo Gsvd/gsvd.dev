@@ -1,4 +1,4 @@
-package internal
+package services
 
 import (
 	"bytes"
@@ -7,13 +7,14 @@ import (
 	"strings"
 
 	embeded "github.com/Gsvd/gsvd.dev"
+	"github.com/Gsvd/gsvd.dev/internal/models"
 	"github.com/gernest/front"
 	"github.com/mitchellh/mapstructure"
 )
 
-func LoadArticlesMetadata() ([]ArticleMetadata, error) {
-	var articlesMetadata []ArticleMetadata
-	articles, err := embeded.ArticleFiles.ReadDir("articles")
+func LoadArticles() ([]models.Metadata, error) {
+	var metadatas []models.Metadata
+	articles, err := embeded.ArticleFiles.ReadDir("content")
 	if err != nil {
 		panic(err)
 	}
@@ -33,17 +34,17 @@ func LoadArticlesMetadata() ([]ArticleMetadata, error) {
 			return nil, err
 		}
 
-		metadata := &ArticleMetadata{}
+		metadata := &models.Metadata{}
 		metadata.Slug = strings.TrimSuffix(article.Name(), filepath.Ext(article.Name()))
 		if err := mapstructure.Decode(f, metadata); err != nil {
 			return nil, err
 		}
-		articlesMetadata = append(articlesMetadata, *metadata)
+		metadatas = append(metadatas, *metadata)
 	}
 
-	sort.Slice(articlesMetadata, func(i, j int) bool {
-		return articlesMetadata[i].Id > articlesMetadata[j].Id
+	sort.Slice(metadatas, func(i, j int) bool {
+		return metadatas[i].Id > metadatas[j].Id
 	})
 
-	return articlesMetadata, nil
+	return metadatas, nil
 }

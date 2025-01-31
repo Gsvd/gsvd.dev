@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"github.com/Gsvd/gsvd.dev/internal"
+	"github.com/Gsvd/gsvd.dev/internal/services"
 	"github.com/gofiber/fiber/v2"
 )
 
 func HomeHandler(c *fiber.Ctx) error {
-	articlesMetadata, err := internal.LoadArticlesMetadata()
+	articlesMetadata, err := services.LoadArticles()
 	if err != nil {
 		panic(err)
 	}

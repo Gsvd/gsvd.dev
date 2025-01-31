@@ -1,8 +1,8 @@
-package internal
+package models
 
 import "html/template"
 
 type Article struct {
-	Metadata ArticleMetadata
+	Metadata Metadata
 	Content  template.HTML
 }
