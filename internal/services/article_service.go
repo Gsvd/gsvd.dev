@@ -8,11 +8,12 @@ import (
 
 	embeded "github.com/Gsvd/gsvd.dev"
 	"github.com/Gsvd/gsvd.dev/internal/models"
+	"github.com/Gsvd/gsvd.dev/internal/store"
 	"github.com/gernest/front"
 	"github.com/mitchellh/mapstructure"
 )
 
-func LoadArticles() ([]models.Metadata, error) {
+func LoadMetadatas() ([]models.Metadata, error) {
 	var metadatas []models.Metadata
 	articles, err := embeded.ContentFiles.ReadDir("internal/content")
 	if err != nil {
@@ -47,4 +48,48 @@ func LoadArticles() ([]models.Metadata, error) {
 	})
 
 	return metadatas, nil
+}
+
+func LoadComments(articleId int) ([]models.Comment, error) {
+	var comments []models.Comment
+
+	store := store.Get()
+	rows, err := store.Query(`
+		SELECT
+			id,
+			username,
+			comment,
+			approved,
+			created_at
+		FROM
+			comments 
+		WHERE
+			post_id = ? 
+			AND approved = TRUE 
+		ORDER BY
+			created_at DESC;
+	`, articleId)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		var comment models.Comment
+		if err := rows.Scan(&comment.Id, &comment.Username, &comment.Comment, &comment.Approved, &comment.CreatedAt); err != nil {
+			return nil, err
+		}
+		comments = append(comments, comment)
+	}
+
+	return comments, nil
+}
+
+func SaveComment(comment *models.Comment) error {
+	store := store.Get()
+	_, err := store.Exec(`
+		INSERT INTO comments (post_id, username, comment, approved)
+		VALUES (?, ?, ?, FALSE);
+	`, comment.PostId, comment.Username, comment.Comment)
+
+	return err
 }

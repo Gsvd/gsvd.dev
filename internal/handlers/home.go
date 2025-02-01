@@ -6,7 +6,7 @@ import (
 )
 
 func HomeHandler(c *fiber.Ctx) error {
-	articlesMetadata, err := services.LoadArticles()
+	articlesMetadata, err := services.LoadMetadatas()
 	if err != nil {
 		panic(err)
 	}

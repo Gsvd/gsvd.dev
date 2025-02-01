@@ -8,12 +8,15 @@ import (
 
 	embeded "github.com/Gsvd/gsvd.dev"
 	"github.com/Gsvd/gsvd.dev/internal/handlers"
+	"github.com/Gsvd/gsvd.dev/internal/store"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
 	"github.com/gofiber/template/html/v2"
 )
 
 func main() {
+	store.Init()
+
 	engine := html.NewFileSystem(http.FS(embeded.TemplateFiles), ".html")
 	app := fiber.New(fiber.Config{
 		Views: engine,
@@ -50,6 +53,7 @@ func main() {
 	app.Get("/", handlers.HomeHandler)
 	app.Get("/blog", handlers.BlogHandler)
 	app.Get("/blog/:title", handlers.BlogPostHandler)
+	app.Post("/blog/:id/comment", handlers.BlogCommentHandler)
 	app.Get("/resume", handlers.ResumeHandler)
 	app.Get("/contact", handlers.ContactHandler)
 
