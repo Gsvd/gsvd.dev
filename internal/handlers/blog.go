@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"time"
 
 	embeded "github.com/Gsvd/gsvd.dev"
 	"github.com/Gsvd/gsvd.dev/internal/models"
@@ -30,7 +31,6 @@ func BlogHandler(c *fiber.Ctx) error {
 
 func BlogPostHandler(c *fiber.Ctx) error {
 	var (
-		comments []models.Comment
 		filename = fmt.Sprintf("internal/content/%s.md", c.Params("title"))
 	)
 
@@ -53,15 +53,9 @@ func BlogPostHandler(c *fiber.Ctx) error {
 
 	htmlContent := blackfriday.Run([]byte(body))
 
-	comments, err = services.LoadComments(metadata.Id)
-	if err != nil {
-		panic(err)
-	}
-
 	article := models.Article{
 		Metadata: *metadata,
 		Content:  template.HTML(htmlContent),
-		Comments: comments,
 	}
 
 	return c.Render("internal/templates/post", fiber.Map{
@@ -71,10 +65,27 @@ func BlogPostHandler(c *fiber.Ctx) error {
 	}, "internal/templates/layouts/post")
 }
 
-func BlogCommentHandler(c *fiber.Ctx) error {
+func BlogLoadCommentsHandler(c *fiber.Ctx) error {
+	articleId, err := strconv.Atoi(c.Params("id"))
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).SendString("Invalid article Id")
+	}
+
+	comments, err := services.LoadComments(articleId)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).SendString("Error loading comments")
+	}
+
+	return c.Render("internal/templates/partials/comments", fiber.Map{
+		"Comments": comments,
+	})
+}
+
+func BlogAddCommentHandler(c *fiber.Ctx) error {
 	var (
 		comment = &models.Comment{
-			Username: "Anonymous",
+			Username:  "Anonymous",
+			CreatedAt: time.Now().UTC(),
 		}
 	)
 
@@ -85,19 +96,25 @@ func BlogCommentHandler(c *fiber.Ctx) error {
 
 	comment.PostId = articleId
 
-	if value := c.FormValue("comment"); value != "" {
-		comment.Comment = value
-	} else {
-		return c.Status(fiber.StatusBadRequest).SendString("Comment is required")
-	}
-
 	if value := c.FormValue("username"); value != "" && len(value) <= 16 {
 		comment.Username = value
 	}
 
-	if err := services.SaveComment(comment); err != nil {
-		panic(err)
+	if value := c.FormValue("comment"); value != "" && len(value) <= 512 {
+		comment.Comment = value
+	} else if len(value) > 512 {
+		comment.Comment = value[:509] + "..."
 	}
 
-	return c.Redirect(fmt.Sprintf("/blog/%s#comments", c.FormValue("slug")))
+	if err := services.SaveComment(comment); err != nil {
+		return c.Status(fiber.StatusInternalServerError).SendString("Error saving comment")
+	}
+
+	comment.CreatedAtFormatted = comment.CreatedAt.UTC().Format("January 2, 2006 at 3:04 PM")
+
+	return c.Render("internal/templates/partials/comment", fiber.Map{
+		"Comment":            comment.Comment,
+		"Username":           comment.Username,
+		"CreatedAtFormatted": comment.CreatedAtFormatted,
+	})
 }

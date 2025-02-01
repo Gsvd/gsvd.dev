@@ -62,10 +62,10 @@ func LoadComments(articleId int) ([]models.Comment, error) {
 			approved,
 			created_at
 		FROM
-			comments 
+			comments
 		WHERE
-			post_id = ? 
-			AND approved = TRUE 
+			post_id = ?
+			AND approved = TRUE
 		ORDER BY
 			created_at DESC;
 	`, articleId)
@@ -78,6 +78,9 @@ func LoadComments(articleId int) ([]models.Comment, error) {
 		if err := rows.Scan(&comment.Id, &comment.Username, &comment.Comment, &comment.Approved, &comment.CreatedAt); err != nil {
 			return nil, err
 		}
+
+		comment.CreatedAtFormatted = comment.CreatedAt.UTC().Format("January 2, 2006 at 3:04 PM")
+
 		comments = append(comments, comment)
 	}
 

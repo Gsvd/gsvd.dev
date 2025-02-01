@@ -1,0 +1,5 @@
+{{range .Comments}}
+{{template "internal/templates/partials/comment" .}}
+{{else}}
+<p id="no-comments-message" class="text-[#3a3737] dark:text-[#fbf1c7]">No comments yet. Be the first to comment!</p>
+{{end}}

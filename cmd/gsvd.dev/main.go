@@ -53,7 +53,8 @@ func main() {
 	app.Get("/", handlers.HomeHandler)
 	app.Get("/blog", handlers.BlogHandler)
 	app.Get("/blog/:title", handlers.BlogPostHandler)
-	app.Post("/blog/:id/comment", handlers.BlogCommentHandler)
+	app.Get("/blog/:id/comments", handlers.BlogLoadCommentsHandler)
+	app.Post("/blog/:id/comment", handlers.BlogAddCommentHandler)
 	app.Get("/resume", handlers.ResumeHandler)
 	app.Get("/contact", handlers.ContactHandler)
 
