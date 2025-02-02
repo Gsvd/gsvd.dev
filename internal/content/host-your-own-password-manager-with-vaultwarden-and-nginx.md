@@ -2,6 +2,7 @@
 title: "Host your own password manager with Vaultwarden and Nginx"
 description: "Vaultwarden comes with all applications and browser extensions you need, it's simple to install, so why not just using it?"
 slug: "host-your-own-password-manager-with-vaultwarden-and-nginx"
+image: "2.jpg"
 date: "January 30, 2025"
 id: 2
 ---

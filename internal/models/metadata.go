@@ -5,5 +5,6 @@ type Metadata struct {
 	Slug        string
 	Title       string
 	Description string
+	Image       string
 	Date        string
 }

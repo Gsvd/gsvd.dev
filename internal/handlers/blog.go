@@ -32,6 +32,7 @@ func BlogHandler(c *fiber.Ctx) error {
 func BlogPostHandler(c *fiber.Ctx) error {
 	var (
 		filename = fmt.Sprintf("internal/content/%s.md", c.Params("title"))
+		image    = "0.jpg"
 	)
 
 	fileContent, err := embeded.ContentFiles.ReadFile(filename)
@@ -51,6 +52,10 @@ func BlogPostHandler(c *fiber.Ctx) error {
 		panic(err)
 	}
 
+	if metadata.Image != "" {
+		image = metadata.Image
+	}
+
 	htmlContent := blackfriday.Run([]byte(body))
 
 	article := models.Article{
@@ -62,6 +67,7 @@ func BlogPostHandler(c *fiber.Ctx) error {
 		"Title":     metadata.Title + " - Gsvd",
 		"Article":   article,
 		"Canonical": "blog/" + metadata.Slug,
+		"Image":     image,
 	}, "internal/templates/layouts/post")
 }
 

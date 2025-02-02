@@ -2,9 +2,7 @@
 
 <div class="flex flex-col gap-y-4">
     <h1 class="text-2xl">Blog Articles</h1>
-    <p>Over the years, I've cultivated a passion for sharing my thoughts, experiences, and insights, especially when it comes to the ever-evolving world of technology. While I may occasionally delve into a variety of topics, the heart of this blog remains rooted in tech.</p>
     <p>Please note, the opinions and views expressed here are solely my own and do not reflect the perspectives or positions of any of my current, past, or future employers. I value the freedom of thought and expression, and this space serves as a testament to that.</p>
-    <p>Thank you for joining me on this journey. I hope you find the content both informative and thought-provoking.</p>
     <ul class="list-disc ml-4">
         {{range .Articles}}
         <li>{{.Date}} - <a href="/blog/{{.Slug}}">{{.Title}}</a></li>
