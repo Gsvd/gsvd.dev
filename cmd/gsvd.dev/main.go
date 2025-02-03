@@ -3,11 +3,16 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
 
+	"github.com/gofiber/fiber/v2/middleware/basicauth"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/joho/godotenv"
 
 	embeded "github.com/Gsvd/gsvd.dev"
 	"github.com/Gsvd/gsvd.dev/internal/handlers"
+	"github.com/Gsvd/gsvd.dev/internal/stats"
 	"github.com/Gsvd/gsvd.dev/internal/store"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/filesystem"
@@ -15,7 +20,13 @@ import (
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	store.Init()
+	stats.Init()
 
 	engine := html.NewFileSystem(http.FS(embeded.TemplateFiles), ".html")
 	app := fiber.New(fiber.Config{
@@ -41,6 +52,11 @@ func main() {
 		PathPrefix: "public/fonts",
 		Browse:     false,
 	}))
+	app.Use("/stats", basicauth.New(basicauth.Config{
+		Users: map[string]string{
+			os.Getenv("STATS_USER"): os.Getenv("STATS_PASSWORD"),
+		},
+	}))
 	app.Get("/sitemap.xml", func(c *fiber.Ctx) error {
 		file, err := embeded.SiteMapFile.ReadFile("sitemap.xml")
 		if err != nil {
@@ -57,6 +73,9 @@ func main() {
 	app.Post("/blog/:id/comment", handlers.BlogAddCommentHandler)
 	app.Get("/resume", handlers.ResumeHandler)
 	app.Get("/contact", handlers.ContactHandler)
+	app.Get("/stats", func(c *fiber.Ctx) error {
+		return c.SendFile(filepath.Join(os.Getenv("STATS_DIRECTORY"), os.Getenv("STATS_FILE")))
+	})
 
 	log.Fatal(app.Listen(":3000"))
 }

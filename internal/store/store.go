@@ -4,41 +4,40 @@ import (
 	"database/sql"
 	"log"
 	"os"
-	"sync"
+	"path/filepath"
 
 	_ "modernc.org/sqlite"
 )
 
 var (
 	instance *sql.DB
-	once     sync.Once
 )
 
 func Init() *sql.DB {
-	once.Do(func() {
-		path := "./data/db.sqlite"
+	sqliteDirectory := os.Getenv("SQLITE_DIRECTORY")
+	sqliteFile := os.Getenv("SQLITE_FILE")
+	sqlitePath := filepath.Join(sqliteDirectory, sqliteFile)
 
-		if _, err := os.Stat(path); os.IsNotExist(err) {
-			log.Println("📂 SQLite file not found. Creating database...")
-			if err := os.MkdirAll("data", 0755); err != nil {
-				log.Fatalf("Failed to create data/ directory: %v", err)
-			}
+	if _, err := os.Stat(sqlitePath); os.IsNotExist(err) {
+		log.Println("📂 SQLite file not found. Creating database...")
+		if err := os.MkdirAll(sqliteDirectory, 0755); err != nil {
+			log.Fatalf("Failed to create data/ directory: %v", err)
 		}
+	}
 
-		var err error
-		instance, err = sql.Open("sqlite", path)
-		if err != nil {
-			log.Fatalf("SQLite connection error: %v", err)
-		}
+	var err error
+	instance, err = sql.Open("sqlite", sqlitePath)
+	if err != nil {
+		log.Fatalf("SQLite connection error: %v", err)
+	}
 
-		if err = instance.Ping(); err != nil {
-			log.Fatalf("SQLite ping error: %v", err)
-		}
+	if err = instance.Ping(); err != nil {
+		log.Fatalf("SQLite ping error: %v", err)
+	}
 
-		createTables(instance)
+	createTables(instance)
 
-		log.Println("✅ SQLite initialized")
-	})
+	log.Println("✅ SQLite initialized")
 
 	return instance
 }
